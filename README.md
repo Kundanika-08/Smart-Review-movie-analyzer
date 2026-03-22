@@ -16,7 +16,7 @@ Users can log in, browse movies, write reviews, and get sentiment predictions (P
 
 ---
 
-## 🛠 Technologies Used
+## Technologies Used
 - Python (Flask)  
 - HTML, CSS, JavaScript  
 - Machine Learning (Scikit-learn)  
