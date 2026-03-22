@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MovieVerse Home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="home-page">
+
+<header class="topbar">
+<div>
+<p class="brand">MOVIEVERSE</p>
+<p class="welcome">Hello, {{ username }}</p>
+</div>
+<div class="topbar-actions">
+<button type="button" class="ghost-btn" onclick="window.history.back()">Back</button>
+<a href="/cart" class="cart-chip">Cart: <span id="cartCount">{{ cart_count }}</span></a>
+<form action="/logout" method="POST">
+<button type="submit" class="ghost-btn">Logout</button>
+</form>
+</div>
+</header>
+
+<section class="hero">
+<h1>Pick a movie, drop a review, shape what others watch.</h1>
+<p>Every review updates live ratings so new users can decide quickly.</p>
+</section>
+
+<section class="matchmaker">
+<div class="matchmaker-copy">
+<h2>Cinematic Matchmaker</h2>
+<p>Choose your mood and get one smart pick with a clear reason.</p>
+</div>
+<div class="matchmaker-controls">
+<select id="moodSelect" class="mood-select">
+<option value="">Choose mood</option>
+<option value="mind-bending">Mind-Bending</option>
+<option value="emotional">Emotional</option>
+<option value="dark">Dark</option>
+<option value="feel-good">Feel-Good</option>
+</select>
+<button type="button" id="matchmakerBtn" class="primary-btn matchmaker-btn">Find My Movie</button>
+</div>
+<div id="matchmakerResult" class="matchmaker-result"></div>
+</section>
+
+{% for row in movie_rows %}
+<section class="row-block">
+<div class="row-head">
+<h2>{{ row.title }}</h2>
+<div class="row-nav">
+<button class="scroll-btn" data-row="row-{{ loop.index }}" data-dir="left">◀</button>
+<button class="scroll-btn" data-row="row-{{ loop.index }}" data-dir="right">▶</button>
+</div>
+</div>
+
+<div class="movie-row" id="row-{{ loop.index }}">
+{% for movie in row.movies %}
+<article class="movie-card" data-movie="{{ movie.name }}">
+<img src="{{ movie.poster_url }}" alt="{{ movie.name }}" loading="lazy">
+<div class="movie-meta">
+<h3>{{ movie.name }}</h3>
+<p class="rating-line" id="rating-{{ movie.slug }}">
+{% if movie.avg_rating %}
+{{ movie.avg_rating }}/5 from {{ movie.review_count }} reviews
+{% else %}
+No ratings yet
+{% endif %}
+</p>
+<div class="card-actions">
+<button class="mini-btn review-trigger"
+data-movie="{{ movie.name }}"
+data-poster="{{ movie.poster_url }}"
+data-description="{{ movie.description }}">Review</button>
+<button class="mini-btn cart-trigger"
+data-movie="{{ movie.name }}"
+{% if movie.in_cart %}disabled{% endif %}>
+{% if movie.in_cart %}In Cart{% else %}Add to Cart{% endif %}
+</button>
+</div>
+</div>
+</article>
+{% endfor %}
+</div>
+</section>
+{% endfor %}
+
+<div class="modal-backdrop" id="reviewModal" aria-hidden="true">
+<div class="modal-card">
+<button class="close-modal" id="closeModal">Back</button>
+<img id="modalPoster" src="" alt="Movie poster">
+<h3 id="modalMovie"></h3>
+<p class="movie-description" id="movieDescription"></p>
+
+<form id="reviewForm">
+<input type="hidden" id="movieInput" name="movie">
+<label for="reviewText">Your Review</label>
+<textarea id="reviewText" name="review" placeholder="Write your review for this movie..."></textarea>
+<p class="form-error" id="reviewError"></p>
+<button type="submit" class="primary-btn">Analyze Review</button>
+</form>
+
+<div class="result-box" id="analysisResult"></div>
+
+<div class="community-reviews">
+<h4>What other users said</h4>
+<div id="reviewsList"></div>
+</div>
+</div>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Cart</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="home-page">
+
+<header class="topbar">
+<div>
+<p class="brand">MOVIEVERSE</p>
+<p class="welcome">{{ username }}'s watch cart</p>
+</div>
+<div class="topbar-actions">
+<a href="/home" class="ghost-btn cart-nav-link">Home</a>
+<p class="cart-chip">Items: {{ cart_count }}</p>
+<form action="/logout" method="POST">
+<button type="submit" class="ghost-btn">Logout</button>
+</form>
+</div>
+</header>
+
+<section class="hero">
+<h1>Your Cart Movies</h1>
+<p>These are the movies you marked to watch later.</p>
+</section>
+
+<section class="row-block">
+{% if cart_movies %}
+<div class="cart-grid">
+{% for movie in cart_movies %}
+<article class="movie-card">
+<img src="{{ movie.poster_url }}" alt="{{ movie.name }}" loading="lazy">
+<div class="movie-meta">
+<h3>{{ movie.name }}</h3>
+<p class="rating-line">
+{% if movie.avg_rating %}
+{{ movie.avg_rating }}/5 from {{ movie.review_count }} reviews
+{% else %}
+No ratings yet
+{% endif %}
+</p>
+<p class="cart-desc">{{ movie.description }}</p>
+<form action="/cart/remove" method="POST" class="cart-remove-form">
+<input type="hidden" name="movie" value="{{ movie.name }}">
+<button type="submit" class="mini-btn remove-btn">Remove from Cart</button>
+</form>
+</div>
+</article>
+{% endfor %}
+</div>
+{% else %}
+<div class="empty-cart-box">
+<h3>Your cart is empty</h3>
+<p>Go back to Home and add movies to your cart.</p>
+<a href="/home" class="primary-btn cart-home-btn">Browse Movies</a>
+</div>
+{% endif %}
+</section>
+
+</body>
+</html>

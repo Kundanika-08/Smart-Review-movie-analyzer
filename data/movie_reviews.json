@@ -1,0 +1,60 @@
+{
+  "No Country for Old Men": [
+    {
+      "user": "kuku_08",
+      "text": "IT IS VERY BAD",
+      "sentiment": "Negative",
+      "rating": 1.5,
+      "stars": "\u2605\u2606\u2606\u2606\u2606",
+      "created_at": "2026-03-22T19:06:18.944082"
+    },
+    {
+      "user": "kuku_08",
+      "text": "IT IS VERY BAD AND I THINK AT LAST IT IS INTERESTING AND MAY BE GOOD HIT",
+      "sentiment": "Negative",
+      "rating": 1.5,
+      "stars": "\u2605\u2606\u2606\u2606\u2606",
+      "created_at": "2026-03-22T19:06:38.342002"
+    }
+  ],
+  "Parasite": [
+    {
+      "user": "kuku_08",
+      "text": "IT ISVERY GOOD",
+      "sentiment": "Positive",
+      "rating": 4.5,
+      "stars": "\u2605\u2605\u2605\u2605\u2605",
+      "created_at": "2026-03-22T19:16:09.138544"
+    }
+  ],
+  "Black Swan": [
+    {
+      "user": "kuku_08",
+      "text": "IT IS SCARY",
+      "sentiment": "Negative",
+      "rating": 1.5,
+      "stars": "\u2605\u2606\u2606\u2606\u2606",
+      "created_at": "2026-03-22T20:20:07.351403"
+    }
+  ],
+  "Titanic": [
+    {
+      "user": "kuku_08",
+      "text": "IT IS EMOTINAL",
+      "sentiment": "Positive",
+      "rating": 4.5,
+      "stars": "\u2605\u2605\u2605\u2605\u2605",
+      "created_at": "2026-03-22T20:22:06.683339"
+    }
+  ],
+  "Get Out": [
+    {
+      "user": "kuku_08",
+      "text": "IT IS SO DARK",
+      "sentiment": "Positive",
+      "rating": 4.5,
+      "stars": "\u2605\u2605\u2605\u2605\u2605",
+      "created_at": "2026-03-22T20:23:02.857138"
+    }
+  ]
+}

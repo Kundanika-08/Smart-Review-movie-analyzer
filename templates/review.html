@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="review-box">
+
+<button onclick="goHome()">🏠 Home</button>
+
+<h2>{{ movie }}</h2>
+
+<form action="/predict" method="POST" onsubmit="return validateForm()">
+<input type="hidden" name="movie" value="{{ movie }}">
+
+<textarea id="reviewText" name="review"></textarea>
+
+<button>Analyze</button>
+</form>
+
+<p style="color:red;">{{ error }}</p>
+
+<hr>
+
+<h3>Reviews</h3>
+
+{% for r in reviews %}
+<div style="background:#333;padding:10px;margin:10px;border-radius:10px;">
+<p>{{ r.text }}</p>
+<p>{{ r.sentiment }} | {{ r.rating }}</p>
+</div>
+{% endfor %}
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
